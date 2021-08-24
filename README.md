@@ -1,7 +1,7 @@
 # AWS modules migration script from community.aws to amazon.aws
 
 ## Usage
-Create a GitHub personal access token to use in place of a password with the API and set it within the username inside run.sh. In addition, please specify the name of the AWS module you want to migrate.
+Create a GitHub personal access token to use in place of a password with the API and set it within the username inside run.sh. In addition, please specify the name of the AWS module you want to migrate and the collections paths.
 ```bash
 export GITHUB_TOKEN="Token ..."
 export USERNAME="GitHub username"
