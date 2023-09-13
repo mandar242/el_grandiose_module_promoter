@@ -59,7 +59,7 @@ def add_changelog(to_be_migrated):
 def ensure_and_dump_meta(data, path):
     dump_to_file(data, f"{path}/meta/runtime.yml")
 
-    runtime_file = Path(f"{path}meta/runtime.yml")
+    runtime_file = Path(f"{path}/meta/runtime.yml")
     no_empty_lines = [l for l in runtime_file.read_text().split("\n") if l != ""]
     content = '\n'.join(no_empty_lines)
     if not content.startswith("---\n"):
