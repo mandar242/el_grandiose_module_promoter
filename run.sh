@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-export GITHUB_TOKEN="Token ..."
-export USERNAME="GitHub username"
-module_to_migrate="module name"
-src_collection_name="srcnamespace.name"
-src_collection_path="community.aws collection path"
-dest_collection_name="destnamespace.name"
-dest_collection_path="amazon.aws collection path"
+export GITHUB_TOK="xxx"
+export USERNAME="xxx"
+module_to_migrate="xx"
+src_collection_name="community.aws"
+src_collection_path="/Users/xx/.ansible/collections/ansible_collections/community/aws"
+dest_collection_name="amazon.aws"
+dest_collection_path="/Users/xx/.ansible/collections/ansible_collections/amazon/aws"
 
 # quick sanity checks
 if ! [ -d "${src_collection_path}" ]; then
@@ -70,12 +70,12 @@ python3 $main_folder_scripts/regenerate.py ${src_collection_path} ${dest_collect
 cd ${dest_collection_path}
 echo `git add meta/runtime* && git commit -m "Update runtime"`
 
-sed -i "s/$src_collection_name.$module_to_migrate/$dest_collection_name.$module_to_migrate/g" plugins/modules/$module_to_migrate*
-sed -i "s/collection_name='$src_collection_name'/collection_name='$dest_collection_name'/g" plugins/modules/$module_to_migrate*
+sed -i "" "s/${src_collection_name}\.${module_to_migrate}/${dest_collection_name}\.${module_to_migrate}/g" plugins/modules/${module_to_migrate}*
+sed -i "" "s/collection_name='${src_collection_name}'/collection_name='${dest_collection_name}'/g" plugins/modules/${module_to_migrate}*
 git add plugins/modules/$module_to_migrate*
 git commit -m "Update FQDN"
 
-sed -i "s/from ansible_collections.community.aws.plugins.module_utils.modules import AnsibleCommunityAWSModule as AnsibleAWSModule/from ansible_collections.amazon.aws.plugins.module_utils.modules import AnsibleAWSModule/g" plugins/modules/$module_to_migrate*
+sed -i "" "s/from ansible_collections.community.aws.plugins.module_utils.modules import AnsibleCommunityAWSModule as AnsibleAWSModule/from ansible_collections.amazon.aws.plugins.module_utils.modules import AnsibleAWSModule/g" plugins/modules/${module_to_migrate}*
 echo `git add plugins/modules/$module_to_migrate* && git commit -m "Update AnsibleAWSModule import path"`
 
 python $main_folder_scripts/clean_tests.py ${dest_collection_path} ${dest_collection_name} $module_to_migrate

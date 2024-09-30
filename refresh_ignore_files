@@ -10,7 +10,7 @@ amazon_path = Path(sys.argv[3])
 ignore_dir = community_path / "tests" / "sanity"
 ignore_dir.mkdir(parents=True, exist_ok=True)
 
-for version in ["2.9", "2.10", "2.11", "2.12"]:
+for version in ["2.14", "2.15", "2.16", "2.17", "2.18", "2.19"]:
     to_be_removed = []
     ignore_file = ignore_dir / f"ignore-{version}.txt"
     ignore_content = ignore_file.read_text().split("\n")
